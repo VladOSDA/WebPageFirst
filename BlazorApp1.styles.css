@@ -3,40 +3,58 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
 }
 
 main[b-5383j6hyu8] {
     flex: 1;
+    /* no top padding so main starts at the top (content will be under the fixed header) */
 }
 
-.sidebar[b-5383j6hyu8] {
-    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
-}
-
+/* default header (keeps previous behavior if not overlay) */
 .top-row[b-5383j6hyu8] {
-    background-color: #f7f7f7;
-    border-bottom: 1px solid #d6d5d5;
-    justify-content: flex-end;
-    height: 3.5rem;
     display: flex;
     align-items: center;
+    justify-content: flex-end;
+    height: 3.5rem;
+    width: 100%;
+    box-sizing: border-box;
+    flex: 0 0 100%;
+    z-index: 1000;
 }
 
-    .top-row[b-5383j6hyu8]  a, .top-row[b-5383j6hyu8]  .btn-link {
-        white-space: nowrap;
-        margin-left: 1.5rem;
-        text-decoration: none;
-    }
+/* Overlay variant: header is fixed and does NOT occupy normal layout space */
+.top-row.overlay[b-5383j6hyu8] {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3.5rem;
+    width: 100%;
+    box-sizing: border-box;
+    flex: 0 0 auto !important; /* override the full-row flex */
+    z-index: 1000; /* above background but below very-high z elements like carousel arrows */
+    background-color: transparent; /* optional, change to transparent if you prefer */
 
-    .top-row[b-5383j6hyu8]  a:hover, .top-row[b-5383j6hyu8]  .btn-link:hover {
-        text-decoration: underline;
-    }
+}
 
-    .top-row[b-5383j6hyu8]  a:first-child {
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
+/* keep deep link rules for NavMenu */
+.top-row[b-5383j6hyu8]  a, .top-row[b-5383j6hyu8]  .btn-link {
+    white-space: nowrap;
+    margin-left: 1.5rem;
+    text-decoration: none;
+}
 
+.top-row[b-5383j6hyu8]  a:hover, .top-row[b-5383j6hyu8]  .btn-link:hover {
+    text-decoration: underline;
+}
+
+.top-row[b-5383j6hyu8]  a:first-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Responsive adjustments (preserve existing behavior) */
 @media (max-width: 640.98px) {
     .top-row[b-5383j6hyu8] {
         justify-content: space-between;
@@ -50,6 +68,7 @@ main[b-5383j6hyu8] {
 @media (min-width: 641px) {
     .page[b-5383j6hyu8] {
         flex-direction: row;
+        flex-wrap: wrap;
     }
 
     .sidebar[b-5383j6hyu8] {
@@ -59,10 +78,9 @@ main[b-5383j6hyu8] {
         top: 0;
     }
 
+    /* when not overlaying, header still spans row */
     .top-row[b-5383j6hyu8] {
-        position: sticky;
         top: 0;
-        z-index: 1;
     }
 
     .top-row.auth[b-5383j6hyu8]  a:first-child {
@@ -76,87 +94,509 @@ main[b-5383j6hyu8] {
         padding-right: 1.5rem !important;
     }
 }
+
+
 /* /Layout/NavMenu.razor.rz.scp.css */
-.navbar-toggler[b-da4la3n260] {
-    background-color: rgba(255, 255, 255, 0.1);
+.header-block[b-da4la3n260] {
+    width: 100%;
+    z-index: 20;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
 }
 
-.top-row[b-da4la3n260] {
-    height: 3.5rem;
-    background-color: rgba(0,0,0,0.4);
+.logo[b-da4la3n260] {
+    width: 200px;
+    height: 56px;
+    overflow: hidden;
+}   
+    .logo .btn[b-da4la3n260]{
+        width: inherit;
+        height: inherit;
+        background-color: transparent;
+        border-width: 0px;
+    }
+        .logo .btn .img[b-da4la3n260] {
+            padding: 15px 0px 0px 0px;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+.header-center[b-da4la3n260] {
+    flex: 1;
+    display: flex;
+    justify-content: center;
 }
 
-.navbar-brand[b-da4la3n260] {
-    font-size: 1.1rem;
+.search[b-da4la3n260] {
+    width: 350px;
+    padding: 8px 14px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
 }
 
-.bi[b-da4la3n260] {
-    display: inline-block;
+.header-right[b-da4la3n260] {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.menu-btn[b-da4la3n260] {
+    border: none;
+    background: none;
+    font-size: 22px;
+    cursor: pointer;
+}
+/* /Pages/Home.razor.rz.scp.css */
+body[b-rnrr1pkvg1] {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+/* ===== HEADER BLOCK ===== */
+
+.header-block[b-rnrr1pkvg1] {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+}
+
+
+.header-center[b-rnrr1pkvg1] {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.search[b-rnrr1pkvg1] {
+    width: 250px;
+    padding: 8px 14px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+}
+
+.header-right[b-rnrr1pkvg1] {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.contacts[b-rnrr1pkvg1] {
+    color: #0a65c0;
+    text-decoration: none;
+}
+
+.menu-btn[b-rnrr1pkvg1] {
+    font-size: 22px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+
+/* ===== HERO CAROUSEL BLOCK ===== */
+
+.hero-carousel-block[b-rnrr1pkvg1] {
     position: relative;
-    width: 1.25rem;
-    height: 1.25rem;
-    margin-right: 0.75rem;
-    top: -1px;
-    background-size: cover;
+    height: 450px;
+    background: #f7f7f7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.bi-house-door-fill-nav-menu[b-da4la3n260] {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' class='bi bi-house-door-fill' viewBox='0 0 16 16'%3E%3Cpath d='M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5Z'/%3E%3C/svg%3E");
+.carousel-arrow[b-rnrr1pkvg1] {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
-.bi-plus-square-fill-nav-menu[b-da4la3n260] {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' class='bi bi-plus-square-fill' viewBox='0 0 16 16'%3E%3Cpath d='M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z'/%3E%3C/svg%3E");
-}
-
-.bi-list-nested-nav-menu[b-da4la3n260] {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' class='bi bi-list-nested' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M4.5 11.5A.5.5 0 0 1 5 11h10a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zm-2-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm-2-4A.5.5 0 0 1 1 3h10a.5.5 0 0 1 0 1H1a.5.5 0 0 1-.5-.5z'/%3E%3C/svg%3E");
-}
-
-.nav-item[b-da4la3n260] {
-    font-size: 0.9rem;
-    padding-bottom: 0.5rem;
-}
-
-    .nav-item:first-of-type[b-da4la3n260] {
-        padding-top: 1rem;
+    .carousel-arrow.left[b-rnrr1pkvg1] {
+        left: 30px;
     }
 
-    .nav-item:last-of-type[b-da4la3n260] {
-        padding-bottom: 1rem;
+    .carousel-arrow.right[b-rnrr1pkvg1] {
+        right: 30px;
     }
 
-    .nav-item[b-da4la3n260]  a {
-        color: #d7d7d7;
-        border-radius: 4px;
-        height: 3rem;
+.machine-image[b-rnrr1pkvg1] {
+    width: 80%;
+    height: 350px;
+    border: 1px dashed #aaa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* ===== MACHINE INFO BLOCK ===== */
+
+
+/* /Pages/Vigor.razor.rz.scp.css */
+*[b-esf77j5k05] {
+    border: 0px solid black;
+}
+.main-info-block[b-esf77j5k05] {
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: whitesmoke;
+}
+.head[b-esf77j5k05] {
+    width: 50%;
+    font-size: 50px;
+    text-align: center;
+    font-weight: bold;
+    color: #ebb001;
+    font-family: Calibri;
+}
+.subhead[b-esf77j5k05] {
+    width: 50%;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    color: #f8b900;
+    font-family: Calibri;
+}
+.three-cols-text[b-esf77j5k05] {
+    width: 80%;
+    column-count: 3; /* Divides the content into 3 columns */
+    column-gap: 100px
+}
+    .three-cols-text .colmn[b-esf77j5k05] {
+        font-size: 18px;
+        font-family: Calibri;
+        color: dimgray;
+    }
+/* /UsefulStuff/BackGroundPictureWithText.razor.rz.scp.css */
+.bigpicture-root[b-7224xrapyg] {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+
+    /* the background layer is absolutely positioned to fill the root */
+    .bigpicture-root .background[b-7224xrapyg] {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
         display: flex;
         align-items: center;
-        line-height: 3rem;
+        justify-content: center;
+        pointer-events: none;
+        background: white;
     }
 
-.nav-item[b-da4la3n260]  a.active {
-    background-color: rgba(255,255,255,0.37);
-    color: white;
-}
-
-.nav-item[b-da4la3n260]  a:hover {
-    background-color: rgba(255,255,255,0.1);
-    color: white;
-}
-
-@media (min-width: 641px) {
-    .navbar-toggler[b-da4la3n260] {
-        display: none;
+    /* content that sits above the background */
+    .bigpicture-root .background-content[b-7224xrapyg] {
+        position: relative;
+        z-index: 1;
+        pointer-events: none;
     }
 
-    .collapse[b-da4la3n260] {
-        /* Never collapse the sidebar for wide screens */
-        display: block;
+
+
+
+/* arrows are visually on top of the background but below content */
+.carousel-arrow[b-7224xrapyg] {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 90px;
+    font-stretch: expanded;
+    background-color: transparent;
+    color: white; /*text color*/
+    -webkit-text-stroke-width: 0.3px; /*Stroke withd*/
+    -webkit-text-stroke-color: black; /*Stroke color*/
+    border: none;
+    cursor: pointer;
+    z-index: 2;
+    pointer-events: auto;
+    user-select: none;
+    padding: 6px 10px;
+}
+
+    .carousel-arrow.left[b-7224xrapyg] {
+        left: 0%;
+    }
+
+    .carousel-arrow.right[b-7224xrapyg] {
+        right: 0%;
+    }
+
+.machine-image[b-7224xrapyg] {
+    width: 100%;
+    height: 90%;
+    left: 15%;
+    top: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    pointer-events: none;
+}
+
+    /* stacked images so we can animate them independently */
+    .machine-image .img[b-7224xrapyg] {
+        position: absolute;
+        margin-left: 5%;
+        inset: 0;
+        width: 90%;
+        height: 90%;
+        object-fit: contain;
+        top: 0;
+        left: 0;
+        opacity: 1;
+        user-select: none;
+    }
+
+/* Enter/leave animations */
+.enter-right[b-7224xrapyg] {
+    animation: slideInFromRight-b-7224xrapyg 500ms cubic-bezier(.22,.9,.32,1) forwards;
+}
+
+.leave-left[b-7224xrapyg] {
+    animation: slideOutToLeft-b-7224xrapyg 500ms cubic-bezier(.22,.9,.32,1) forwards;
+}
+
+.enter-left[b-7224xrapyg] {
+    animation: slideInFromLeft-b-7224xrapyg 500ms cubic-bezier(.22,.9,.32,1) forwards;
+}
+
+.leave-right[b-7224xrapyg] {
+    animation: slideOutToRight-b-7224xrapyg 500ms cubic-bezier(.22,.9,.32,1) forwards;
+}
+
+@keyframes slideInFromRight-b-7224xrapyg {
+    from {
+        transform: translateX(20%);
+        opacity: 0;
+        filter: blur(6px);
+    }
+
+    60% {
+        transform: translateX(-4%);
+        opacity: 1;
+        filter: blur(2px);
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+@keyframes slideOutToLeft-b-7224xrapyg {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+        filter: blur(0);
+    }
+
+    to {
+        transform: translateX(-20%);
+        opacity: 0;
+        filter: blur(6px);
+    }
+}
+
+@keyframes slideInFromLeft-b-7224xrapyg {
+    from {
+        transform: translateX(-20%);
+        opacity: 0;
+        filter: blur(6px);
+    }
+
+    60% {
+        transform: translateX(4%);
+        opacity: 1;
+        filter: blur(2px);
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+@keyframes slideOutToRight-b-7224xrapyg {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+        filter: blur(0);
+    }
+
+    to {
+        transform: translateX(20%);
+        opacity: 0;
+        filter: blur(6px);
+    }
+}
+
+
+.info_container[b-7224xrapyg] {
+    width: 400px;
+    height: 300px;
+    top: 50%;
+    left: 5%;
+    position: absolute;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.machine-info-block[b-7224xrapyg] {
+    display: flex;
+    position: absolute;
+    border-radius: 6px;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    pointer-events: none;
+    background-color: whitesmoke;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: start;
+    /*transform: translateY(+50%) translateX(-10%);*/
+    /*margin: 40px 100px;
+    padding: 25px;
+    max-width: 450px;*/
+}
+
+    .machine-info-block .h3[b-7224xrapyg] {
+        padding-left: 3%;
+        font-weight: bold;
+        font-size: 30px;
+        opacity: 1;
+        z-index: 3;
+        cursor: pointer;
+        user-select: none;
+        color: black;
+    }
+    .machine-info-block .txt[b-7224xrapyg] {
+        padding-left: 3%;
+        font-size: 18px;
+        opacity: 1;
+        padding-right: 15px;
+        z-index: 3;
+        cursor: pointer;
+        user-select: none;
+        color: gray;
+        font-family: Calibri
+    }
+    .machine-info-block .btn[b-7224xrapyg] {
+        margin-left: 3%;
+        border-radius: 6px;
+        border: 1px solid #aaa;
+        background-color: #eeb001;
+        border-color: transparent;
+        color: black;
+        z-index: 3;
+        cursor: pointer;
+        pointer-events: auto;
     }
     
-    .nav-scrollable[b-da4la3n260] {
-        /* Allow sidebar to scroll for tall menus */
-        height: calc(100vh - 3.5rem);
-        overflow-y: auto;
+/* /UsefulStuff/SlideDownImage.razor.rz.scp.css */
+.bigpicture-root[b-vubheg6cww] {
+    position: relative;
+    width: 100%;
+    animation: image-fade-out-b-vubheg6cww linear;
+    animation-timeline: view();
+    animation-range: exit;
+}
+
+
+    /* the background layer is absolutely positioned to fill the root */
+    .bigpicture-root .background[b-vubheg6cww] {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: auto; 
+        background: white;
+    }
+
+
+
+/* arrows are visually on top of the background but below content */
+.carousel-arrow[b-vubheg6cww] {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 100px;
+    height: 50px;
+    transform: translateY(-100%) translateX(-50%);
+    background-color: transparent;
+    color: white; /*text color*/
+    border: 2px black;
+    cursor: pointer;
+    z-index: 2;
+    pointer-events: auto;
+    user-select: none;
+    object-fit: fill;
+}
+    .carousel-arrow .down[b-vubheg6cww] {
+        width: 100%;
+        height: auto;
+        transform: scaleY(0.3);
+        fill: #eeb001;
+    }
+
+.machine-image[b-vubheg6cww] {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+    /* stacked images so we can animate them independently */
+    .machine-image .img[b-vubheg6cww] {
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        top: 0;
+        left: 0;
+        user-select: none;
+        animation: image-fade-out-b-vubheg6cww linear;
+        animation-timeline: view();
+        animation-range: exit;
+    }
+
+
+@keyframes fade-out-b-vubheg6cww{
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes image-fade-out-b-vubheg6cww {
+    10% {
+        opacity: 1;
+        scale: 1;
+    }
+    85%, 100% {
+        opacity: 0; 
+        scale: 1;
     }
 }
