@@ -1,16 +1,17 @@
-﻿export function OnCLickEvent(pos, time) {
-    scrollTo(pos, time);
+﻿export function OnCLickEvent( time) {
+    scrollTo(time);
 }
 
 // Element to move, time in ms to animate
-function scrollTo(element, duration) {
+function scrollTo(duration) {
+    var h = window.innerHeight;
     var e = document.documentElement;
-    if (e.scrollTop === element) {
+    if (e.scrollTop === h) {
         var t = e.scrollTop;
         ++e.scrollTop;
         e = t + 1 === e.scrollTop-- ? e : document.body;
     }
-    scrollToC(e, e.scrollTop, element, duration);
+    scrollToC(e, e.scrollTop, h, duration);
 }
 
 // Element to move, element or px from, element or px to, time in ms to animate
